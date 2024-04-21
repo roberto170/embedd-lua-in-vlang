@@ -13,7 +13,6 @@ struct C.luaState{
 type Lua_CFunction = fn (voidptr)int
 
 fn C.lua_newtable(&C.luaState)
-fn C.lua_pushvalue(&C.luaState,int)
 fn C.lua_pushcfunction(&C.luaState,Lua_CFunction)
 fn C.lua_setfield(&C.luaState,int,&char)
 
@@ -25,7 +24,6 @@ fn faz(l voidptr)int{
 [export: 'luaopen_module']
 fn luaopen_module(l voidptr)int{
    C.lua_newtable(l)
-   C.lua_pushvalue(l,-1)
    C.lua_pushcfunction(l,faz)
    C.lua_setfield(l,-2, c"faz")
    return 1
